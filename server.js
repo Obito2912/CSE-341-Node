@@ -5,7 +5,7 @@ const app = express();
 const client = require("./db");
 const routes = require("./routes");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use("/", routes);
@@ -15,7 +15,7 @@ async function main() {
     await client.connect();
     console.log("✅ Mongo connected");
 
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log("Web Server is listening at port " + PORT);
     });
   } catch (e) {
