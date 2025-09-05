@@ -1,28 +1,27 @@
+if (process.env.NODE_ENV !== "production") require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const client = require("./db");
+const routes = require("./routes/index");
 
-const port = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use("/", routes);
 
 async function main() {
-  // We'll add code here soon
   try {
     await client.connect();
-    await listDatabases(client);
+    console.log("✅ Mongo connected");
+
+    app.listen(PORT, () => {
+      console.log("Web Server is listening at port " + PORT);
+    });
   } catch (e) {
     console.error(e);
-  } finally {
-    await client.close();
+    process.exit(1);
   }
 }
 
 main().catch(console.error);
-
-async function listDatabases(client) {
-  const databasesList = await client.db().admin().listDatabases();
-  console.log("Databases:");
-  databasesList.databases.forEach((db) => console.log(` -${db.name}`));
-}
-
-app.listen(process.env.port || port);
-console.log("Web Server is listening at port " + (process.env.port || port));

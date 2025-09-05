@@ -1,3 +1,4 @@
+const router = require("express").Router();
 const controllerExample = require("../controllers/example");
 
-app.get("/", controllerExample.oviRoute);
+router.get("/", controllerExample.oviRoute);
