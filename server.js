@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") require("dotenv").config();
 const express = require("express");
 const app = express();
 const client = require("./db");
-const routes = require("./routes/index");
+const routes = require("./routes");
 
 const PORT = process.env.PORT || 3000;
 
