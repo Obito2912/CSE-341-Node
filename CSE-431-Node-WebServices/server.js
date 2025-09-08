@@ -12,12 +12,12 @@ app.use("/", routes);
 
 async function main() {
   try {
-    await client.connect();
-    console.log("✅ Mongo connected");
-
     app.listen(PORT, "0.0.0.0", () => {
       console.log("Web Server is listening at port " + PORT);
     });
+
+    await client.connect();
+    console.log("✅ Mongo connected");
   } catch (e) {
     console.error(e);
   } finally {
