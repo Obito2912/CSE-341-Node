@@ -10,7 +10,7 @@ POST http://localhost:3003/contacts
 Content-Type: application/json
 
 {
-    "firstName": "Ashley",
+    "firstName": "Carl",
     "lastName": "Weaver",
     "email": "aWeaver@test.com",
     "favoriteColor": "Brown",
@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### Delete contact
-DELETE http://localhost:3003/contacts/68c47c19d51c583ed6a0f1b7
+DELETE http://localhost:3003/contacts/68c4e1f8bbf9e9e44a216ec6
 
 
 // PRODUCTION
@@ -45,19 +45,19 @@ POST https://cse-341-node-lf6n.onrender.com/contacts
 Content-Type: application/json
 
 {
-    "firstName": "Ashley",
-    "lastName": "Weaver",
-    "email": "aWeaver@test.com",
-    "favoriteColor": "Brown",
-    "birthday": "06/19/2000"
+    "firstName": "Carl",
+    "lastName": "Down",
+    "email": "rMartinez@test.com",
+    "favoriteColor": "Red",
+    "birthday": "06/19/2005"
 }
 
 ### Update contact
-PUT https://cse-341-node-lf6n.onrender.com/contacts/68c47c19d51c583ed6a0f1b7
+PUT https://cse-341-node-lf6n.onrender.com/contacts/68c4dfa933d444c1c28d2275
 Content-Type: application/json
 
 {
-    "firstName": "Robert",
+    "firstName": "Mark",
     "lastName": "Rojas",
     "email": "rRojas@test.com",
     "favoriteColor": "Yellow",
@@ -65,4 +65,4 @@ Content-Type: application/json
 }
 
 ### Delete contact
-DELETE https://cse-341-node-lf6n.onrender.com/contacts/68c47c19d51c583ed6a0f1b7
+DELETE https://cse-341-node-lf6n.onrender.com/contacts/68c4e1b033d444c1c28d2277
