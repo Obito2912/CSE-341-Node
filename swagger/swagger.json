@@ -5,10 +5,10 @@
     "description": "This Contacts API allows to retrieve contacts info",
     "version": "1.0.0"
   },
-  "host": "localhost:3003",
+  "host": "cse-341-node-lf6n.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/contacts/": {

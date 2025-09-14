@@ -9,7 +9,7 @@ const doc = {
     description: 'This Contacts API allows to retrieve contacts info',
   },
   host: 'localhost:3003',
-  schemes: ['http'],
+  schemes: ['https', 'http'],
 };
 
 swaggerAutogen(outputFile, endpoints, doc);
