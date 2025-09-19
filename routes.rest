@@ -10,15 +10,15 @@ POST http://localhost:3003/contacts
 Content-Type: application/json
 
 {
-    "firstName": "Carl",
+    "firstName": "Charlie",
     "lastName": "Weaver",
-    "email": "aWeaver@test.com",
+    "email": "aWeavertest.com",
     "favoriteColor": "Brown",
     "birthday": "06/19/2000"
 }
 
 ### Update contact
-PUT http://localhost:3003/contacts/68c47c19d51c583ed6a0f1b7
+PUT http://localhost:3003/contacts/68bc4dcf7a41f173b71f5041
 Content-Type: application/json
 
 {
@@ -31,6 +31,15 @@ Content-Type: application/json
 
 ### Delete contact
 DELETE http://localhost:3003/contacts/68c4e1f8bbf9e9e44a216ec6
+
+
+
+
+
+// ========================================================================================
+
+
+
 
 
 // PRODUCTION
@@ -53,15 +62,11 @@ Content-Type: application/json
 }
 
 ### Update contact
-PUT https://cse-341-node-lf6n.onrender.com/contacts/68c4dfa933d444c1c28d2275
+PUT https://cse-341-node-lf6n.onrender.com/contacts/68bc4dcf7a41f173b71f5041
 Content-Type: application/json
 
 {
-    "firstName": "Mark",
-    "lastName": "Rojas",
-    "email": "rRojas@test.com",
-    "favoriteColor": "Yellow",
-    "birthday": "06/19/2003"
+    "lastName": "Lugo Rosado",
 }
 
 ### Delete contact

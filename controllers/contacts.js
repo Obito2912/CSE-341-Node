@@ -7,10 +7,15 @@ const getAll = async (req, res) => {
     .db()
     .collection('contacts')
     .find({});
-  result.toArray().then((contacts) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(contacts);
-  });
+  result
+    .toArray()
+    .then((contacts) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(contacts);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'An error occurred', error: err });
+    });
 };
 
 const getSingle = async (req, res) => {
@@ -20,10 +25,15 @@ const getSingle = async (req, res) => {
     .db()
     .collection('contacts')
     .find({ _id: contactId });
-  result.toArray().then((contacts) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(contacts[0]);
-  });
+  result
+    .toArray()
+    .then((contacts) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(contacts[0]);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'An error occurred', error: err });
+    });
 };
 
 const createContact = async (req, res) => {
