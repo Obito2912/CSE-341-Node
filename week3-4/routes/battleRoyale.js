@@ -1,41 +1,21 @@
-const { ObjectId } = require('mongodb');
-const mongodb = require('../data/database');
+const router = require('express').Router();
+const brCtrl = require('../controllers/battleRoyale');
+const {
+  validateGameId,
+  validateGameData,
+  handleValidationErrors,
+} = require('../middlewares/validation');
 
-const getAll = async (_req, res) => {
-  try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('battle_royale')
-      .find({})
-      .toArray();
-    if (result.length === 0) {
-      return res.status(404).json({ message: 'No Battle Royale games found' });
-    }
-    return res.status(200).json(result);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
+router.get('/', brCtrl.getAll);
+router.get('/:id', validateGameId, brCtrl.getById);
+router.post('/', validateGameData, handleValidationErrors, brCtrl.createGame);
+router.put(
+  '/:id',
+  validateGameId,
+  validateGameData,
+  handleValidationErrors,
+  brCtrl.updateGame,
+);
+router.delete('/:id', validateGameId, brCtrl.deleteGame);
 
-const getById = async (req, res) => {
-  const bRoyaleId = ObjectId.createFromHexString(req.params.id);
-  try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('battle_royale')
-      .findOne({ _id: bRoyaleId });
-    if (!result) {
-      return res.status(404).json({ message: 'Battle Royale game not found' });
-    }
-    return res.status(200).json(result);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
-
-module.exports = {
-  getAll,
-  getById,
-};
+module.exports = router;
