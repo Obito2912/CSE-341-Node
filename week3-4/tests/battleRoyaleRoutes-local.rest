@@ -1,0 +1,38 @@
+// LOCALHOST BATTLE ROYALE ROUTES TESTS
+
+### Get all Battle Royale games
+GET http://localhost:3003/battle-royale
+
+### Get Battle Royale game by ID
+GET http://localhost:3003/battle-royale/1
+
+### Add a new Battle Royale game
+POST http://localhost:3003/battle-royale
+Content-Type: application/json
+
+{
+  "name": "Apex Legends",
+  "genre": "Battle Royale",
+  "developer": "Respawn Entertainment",
+  "releaseDate": "2019-02-04",
+  "platforms": ["PC", "PlayStation 4", "Xbox One", "Nintendo Switch"],
+  "rating": 9.0,
+  "price": 0.00
+}
+
+### Update an existing Battle Royale game
+PUT http://localhost:3003/battle-royale/1
+Content-Type: application/json
+
+{
+  "name": "Fortnite",
+  "genre": "Battle Royale",
+  "developer": "Epic Games",
+  "releaseDate": "2017-07-25",
+  "platforms": ["PC", "PlayStation 4", "Xbox One", "Nintendo Switch"],
+  "rating": 8.5,
+  "price": 0.00
+}
+
+### Delete a Battle Royale game
+DELETE http://localhost:3003/battle-royale/1
