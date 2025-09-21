@@ -8,7 +8,7 @@ const doc = {
     title: 'RPG and Battle Royale API',
     description: 'This API allows to retrieve RPG and Battle Royale game info',
   },
-  host: 'https://cse-341-node-1.onrender.com',
+  host: 'cse-341-node-1.onrender.com',
   schemes: ['https'],
 };
 
