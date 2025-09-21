@@ -3,12 +3,7 @@ const mongodb = require('../data/database');
 
 const getAll = async (_req, res) => {
   try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('rpg')
-      .find({})
-      .toArray();
+    const result = await mongodb.getDb().collection('rpg').find({}).toArray();
     if (result.length === 0) {
       return res.status(404).json({ message: 'No RPG characters found' });
     }
@@ -19,11 +14,10 @@ const getAll = async (_req, res) => {
 };
 
 const getById = async (req, res) => {
-  const rpgId = ObjectId.createFromHexString(req.params.id);
   try {
+    const rpgId = ObjectId.createFromHexString(req.params.id);
     const result = await mongodb
       .getDb()
-      .db()
       .collection('rpg')
       .findOne({ _id: rpgId });
     if (!result) {
@@ -47,22 +41,17 @@ const createGame = async (req, res) => {
       price: req.body.price,
     };
 
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('rpg')
-      .insertOne(rpgGame);
+    const result = await mongodb.getDb().collection('rpg').insertOne(rpgGame);
 
     if (result.acknowledged) {
-      res.status(201).json({
+      return res.status(201).json({
         message: 'RPG game created successfully.',
         id: result.insertedId,
       });
-    } else {
-      res.status(500).json({ message: 'Failed to create the RPG game.' });
     }
+    return res.status(500).json({ message: 'Failed to create the RPG game.' });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'An error occurred while creating the RPG game.',
       error: err.message,
     });
@@ -70,8 +59,8 @@ const createGame = async (req, res) => {
 };
 
 const updateGame = async (req, res) => {
-  const rpgGameId = ObjectId.createFromHexString(req.params.id);
   try {
+    const rpgGameId = ObjectId.createFromHexString(req.params.id);
     const rpgGame = {
       name: req.body.name,
       genre: req.body.genre,
@@ -82,22 +71,20 @@ const updateGame = async (req, res) => {
       price: req.body.price,
     };
 
-    const result = mongodb
+    const result = await mongodb
       .getDb()
-      .db()
       .collection('rpg')
-      .replaceOne({ id: rpgGameId, rpgGame });
+      .replaceOne({ _id: rpgGameId }, rpgGame);
 
     if (result.modifiedCount > 0) {
-      res.status(200).json({
+      return res.status(200).json({
         message: 'RPG game updated successfully.',
-        id: result.insertedId,
+        id: rpgGameId,
       });
-    } else {
-      res.status(500).json({ message: 'Failed to update RPG game.' });
     }
+    return res.status(500).json({ message: 'Failed to update RPG game.' });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'An error has occurred while updating the RPG game',
       error: err.message,
     });
@@ -105,23 +92,21 @@ const updateGame = async (req, res) => {
 };
 
 const deleteGame = async (req, res) => {
-  const rpgGameId = ObjectId.createFromHexString(req.params.id);
   try {
-    const result = mongodb
+    const rpgGameId = ObjectId.createFromHexString(req.params.id);
+    const result = await mongodb
       .getDb()
-      .db()
       .collection('rpg')
-      .deleteOne({ id: rpgGameId });
+      .deleteOne({ _id: rpgGameId });
 
     if (result.deletedCount > 0) {
-      res.status(200).json({
+      return res.status(200).json({
         message: 'RPG game deleted successfully.',
       });
-    } else {
-      res.status(500).json({ message: 'Failed to delete RPG game.' });
     }
+    return res.status(500).json({ message: 'Failed to delete RPG game.' });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'An error has occurred while deleting the RPG game.',
       error: err.message,
     });

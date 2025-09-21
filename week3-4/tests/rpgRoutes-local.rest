@@ -4,7 +4,7 @@
 GET http://localhost:3003/rpg
 
 ### Get RPG game by ID
-GET http://localhost:3003/rpg/1
+GET http://localhost:3003/rpg/68cf466dc80b628bace26a4d
 
 ### Add a new RPG game
 POST http://localhost:3003/rpg
@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### Update an existing RPG game
-PUT http://localhost:3003/rpg/1
+PUT http://localhost:3003/rpg/68cf466dc80b628bace26a4d
 Content-Type: application/json
 
 {
@@ -35,4 +35,4 @@ Content-Type: application/json
 }
 
 ### Delete an RPG game
-DELETE http://localhost:3003/rpg/1
+DELETE http://localhost:3003/rpg/68cf466dc80b628bace26a4d

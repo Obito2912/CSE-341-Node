@@ -1,0 +1,38 @@
+// PRODUCTION RPG ROUTES TESTS
+
+### Get all RPG games
+GET https://cse-341-node-1.onrender.com/rpg
+
+### Get RPG game by ID
+GET https://cse-341-node-1.onrender.com/rpg/68cf466dc80b628bace26a4d
+
+### Add a new RPG game
+POST https://cse-341-node-1.onrender.com/rpg
+Content-Type: application/json
+
+{
+  "name": "Horizon Zero Dawn",
+  "genre": "Action RPG",
+  "developer": "Guerrilla Games",
+  "releaseDate": "2017-02-28",
+  "platforms": ["PC", "PlayStation 4"],
+  "rating": 9.0,
+  "price": 59.99
+}
+
+### Update an existing RPG game
+PUT https://cse-341-node-1.onrender.com/rpg/68cf466dc80b628bace26a4d
+Content-Type: application/json
+
+{
+  "name": "The Witcher 3: Wild Hunt",
+  "genre": "Fantasy RPG",
+  "developer": "CD Projekt Red",
+  "releaseDate": "2015-05-19",
+  "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
+  "rating": 9.8,
+  "price": 49.99
+}
+
+### Delete an RPG game
+DELETE https://cse-341-node-1.onrender.com/rpg/68cf466dc80b628bace26a4d

@@ -5,7 +5,6 @@ const getAll = async (_req, res) => {
   try {
     const result = await mongodb
       .getDb()
-      .db()
       .collection('battle_royale')
       .find({})
       .toArray();
@@ -19,11 +18,10 @@ const getAll = async (_req, res) => {
 };
 
 const getById = async (req, res) => {
-  const brGameId = ObjectId.createFromHexString(req.params.id);
   try {
+    const brGameId = ObjectId.createFromHexString(req.params.id);
     const result = await mongodb
       .getDb()
-      .db()
       .collection('battle_royale')
       .findOne({ _id: brGameId });
     if (!result) {
@@ -49,22 +47,20 @@ const createGame = async (req, res) => {
 
     const result = await mongodb
       .getDb()
-      .db()
       .collection('battle_royale')
       .insertOne(brGame);
 
     if (result.acknowledged) {
-      res.status(201).json({
+      return res.status(201).json({
         message: 'Battle Royale game created successfully.',
         id: result.insertedId,
       });
-    } else {
-      res
-        .status(500)
-        .json({ message: 'Failed to create the battle royale game.' });
     }
+    return res
+      .status(500)
+      .json({ message: 'Failed to create the battle royale game.' });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'An error occurred while creating the battle royale game.',
       error: err.message,
     });
@@ -72,8 +68,8 @@ const createGame = async (req, res) => {
 };
 
 const updateGame = async (req, res) => {
-  const brGameId = ObjectId.createFromHexString(req.params.id);
   try {
+    const brGameId = ObjectId.createFromHexString(req.params.id);
     const brGame = {
       name: req.body.name,
       genre: req.body.genre,
@@ -84,22 +80,20 @@ const updateGame = async (req, res) => {
       price: req.body.price,
     };
 
-    const result = mongodb
+    const result = await mongodb
       .getDb()
-      .db()
       .collection('battle_royale')
-      .replaceOne({ id: brGameId, brGame });
+      .replaceOne({ _id: brGameId }, brGame);
 
     if (result.modifiedCount > 0) {
-      res.status(200).json({
+      return res.status(200).json({
         message: 'Battle Royale game updated successfully.',
-        id: result.insertedId,
+        id: brGameId,
       });
-    } else {
-      res.status(500).json({ message: 'Failed to update battle royale game.' });
     }
+    return res.status(404).json({ message: 'Battle royale game not found.' });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'An error has occurred while updating the battle royale game',
       error: err.message,
     });
@@ -107,23 +101,21 @@ const updateGame = async (req, res) => {
 };
 
 const deleteGame = async (req, res) => {
-  const brId = ObjectId.createFromHexString(req.params.id);
   try {
-    const result = mongodb
+    const brId = ObjectId.createFromHexString(req.params.id);
+    const result = await mongodb
       .getDb()
-      .db()
       .collection('battle_royale')
-      .deleteOne({ id: brId });
+      .deleteOne({ _id: brId });
 
     if (result.deletedCount > 0) {
-      res.status(200).json({
+      return res.status(200).json({
         message: 'Battle Royale game deleted successfully.',
       });
-    } else {
-      res.status(500).json({ message: 'Failed to delete battle royale game.' });
     }
+    return res.status(404).json({ message: 'Battle royale game not found.' });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'An error has occurred while deleting the battle royale game.',
       error: err.message,
     });

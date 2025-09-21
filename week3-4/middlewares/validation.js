@@ -3,10 +3,14 @@ const { body, validationResult } = require('express-validator');
 
 const validateGameId = (req, res, next) => {
   const { id } = req.params;
-  if (!ObjectId.isValid(id)) {
-    res.status(400).json({ message: 'Invalid Id format.' });
+  try {
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid Id format.' });
+    }
+    return next();
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-  next();
 };
 
 const validateGameData = [
@@ -33,9 +37,9 @@ const validateGameData = [
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
   }
-  next();
+  return next();
 };
 
 module.exports = {

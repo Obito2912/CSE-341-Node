@@ -4,7 +4,7 @@
 GET http://localhost:3003/battle-royale
 
 ### Get Battle Royale game by ID
-GET http://localhost:3003/battle-royale/1
+GET http://localhost:3003/battle-royale/68cf498cc80b628bace26a4e
 
 ### Add a new Battle Royale game
 POST http://localhost:3003/battle-royale
@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### Update an existing Battle Royale game
-PUT http://localhost:3003/battle-royale/1
+PUT http://localhost:3003/battle-royale/68cf498cc80b628bace26a4e
 Content-Type: application/json
 
 {
@@ -35,4 +35,4 @@ Content-Type: application/json
 }
 
 ### Delete a Battle Royale game
-DELETE http://localhost:3003/battle-royale/1
+DELETE http://localhost:3003/battle-royale/68cf498cc80b628bace26a4e
