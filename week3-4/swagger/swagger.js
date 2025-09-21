@@ -8,8 +8,8 @@ const doc = {
     title: 'RPG and Battle Royale API',
     description: 'This API allows to retrieve RPG and Battle Royale game info',
   },
-  host: 'localhost:3003',
-  schemes: ['https', 'http'],
+  host: 'https://cse-341-node-1.onrender.com',
+  schemes: ['https'],
 };
 
 swaggerAutogen(outputFile, endpoints, doc);
