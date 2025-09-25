@@ -1,7 +1,5 @@
-const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
 
-dotenv.config();
 let database;
 
 const initDb = async () => {

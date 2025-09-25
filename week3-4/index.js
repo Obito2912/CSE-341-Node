@@ -1,18 +1,31 @@
+require('dotenv').config();
+require('./config/passport');
+
+// Destructure environment variables
+const { PORT } = process.env;
+
+// Import dependencies and modules
 const express = require('express');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger/swagger.json');
+const sessionConfig = require('./config/session');
 const mongodb = require('./data/database');
 const mainRoute = require('./routes/index');
+const authRoute = require('./routes/auth');
 
+// Initialize Express app
 const app = express();
 
-const PORT = process.env.PORT || 3003;
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Set up session management
+sessionConfig(app);
+
+// Routes
+app.use('/', authRoute);
 app.use('/', mainRoute);
 
+// Start the server after initializing the database
 const startServer = async () => {
   try {
     await mongodb.initDb();
